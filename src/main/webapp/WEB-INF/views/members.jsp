@@ -20,9 +20,9 @@
     </nav>
 
     <div class="content">
-        <h2>Members</h2>
+        <h2>Members &amp; Librarians</h2>
 
-        <a href="${pageContext.request.contextPath}/members/add" class="btn btn-primary">+ Add Member</a>
+        <a href="${pageContext.request.contextPath}/members/add" class="btn btn-primary">+ Add Member / Librarian</a>
 
         <table class="data-table">
             <thead>

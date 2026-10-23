@@ -64,8 +64,13 @@ public class BorrowService {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
 
-        if (dueLocalDate.isBefore(LocalDate.now())) {
+        LocalDate today = LocalDate.now();
+        if (dueLocalDate.isBefore(today)) {
             throw new LibraryException("Due date cannot be set to a past date.");
+        }
+
+        if (dueLocalDate.isAfter(today.plusDays(14))) {
+            throw new LibraryException("Due date cannot be more than 14 days from today.");
         }
 
         User user = userDAO.findById(userId);

@@ -29,7 +29,7 @@ public class BorrowDAO {
      * Save a new borrow record (when a book is issued).
      */
     public void save(BorrowRecord record) {
-        getSession().save(record);
+        getSession().persist(record);
     }
 
     /**
@@ -66,6 +66,6 @@ public class BorrowDAO {
      * Update a borrow record (when a book is returned).
      */
     public void update(BorrowRecord record) {
-        getSession().update(record);
+        getSession().merge(record);
     }
 }

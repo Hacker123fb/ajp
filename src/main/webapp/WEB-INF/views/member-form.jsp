@@ -54,6 +54,14 @@
                        value="${member.password}" required />
             </div>
 
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="MEMBER" ${member.role == 'MEMBER' || empty member.role ? 'selected' : ''}>Member</option>
+                    <option value="LIBRARIAN" ${member.role == 'LIBRARIAN' ? 'selected' : ''}>Librarian</option>
+                </select>
+            </div>
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">${formAction}</button>
                 <a href="${pageContext.request.contextPath}/members" class="btn btn-secondary">Cancel</a>

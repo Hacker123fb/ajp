@@ -30,7 +30,7 @@ public class UserDAO {
      * Save a new user to the database.
      */
     public void save(User user) {
-        getSession().save(user);
+        getSession().persist(user);
     }
 
     /**
@@ -57,13 +57,13 @@ public class UserDAO {
     }
 
     /**
-     * Find all users with role = MEMBER.
-     * Used by librarians and admins to manage members.
-     * HQL: "FROM User WHERE role = 'MEMBER'"
+     * Find all non-admin users (members and librarians).
+     * Used by admins to manage members and librarians.
+     * HQL: "FROM User WHERE role != 'ADMIN'"
      */
     public List<User> findAllMembers() {
         Query<User> query = getSession().createQuery(
-                "FROM User WHERE role = 'MEMBER'", User.class);
+                "FROM User WHERE role != 'ADMIN'", User.class);
         return query.getResultList();
     }
 
@@ -71,7 +71,7 @@ public class UserDAO {
      * Update an existing user.
      */
     public void update(User user) {
-        getSession().update(user);
+        getSession().merge(user);
     }
 
     /**
@@ -80,7 +80,7 @@ public class UserDAO {
     public void delete(int id) {
         User user = findById(id);
         if (user != null) {
-            getSession().delete(user);
+            getSession().remove(user);
         }
     }
 }

@@ -28,15 +28,18 @@ public class HibernateConfig {
      * MySQL DataSource using Spring's standard DriverManagerDataSource.
      * Change the URL, username, and password to match your MySQL setup.
      */
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/library_db?useSSL=false&serverTimezone=UTC");
-        dataSource.setUsername("root");
-        dataSource.setPassword("pavan");
-        return dataSource;
-    }
+
+@Bean
+public DataSource dataSource() {
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+    dataSource.setUrl(
+        "jdbc:mysql://localhost:3306/library_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC"
+    );
+    dataSource.setUsername("root");
+    dataSource.setPassword("pavan");
+    return dataSource;
+}
 
     /**
      * Hibernate SessionFactory.
@@ -58,7 +61,6 @@ public class HibernateConfig {
      */
     private Properties hibernateProperties() {
         Properties props = new Properties();
-        props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         props.setProperty("hibernate.hbm2ddl.auto", "update");
         props.setProperty("hibernate.show_sql", "false");
         props.setProperty("hibernate.format_sql", "false");

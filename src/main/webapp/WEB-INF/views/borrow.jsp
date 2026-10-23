@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dueDate">Due Date:</label>
+                    <label for="dueDate">Due Date (Max 14 days):</label>
                     <input type="date" id="dueDate" name="dueDate" required />
                 </div>
 
@@ -131,10 +131,23 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var today = new Date().toISOString().split("T")[0];
+        var now = new Date();
+        var yyyy = now.getFullYear();
+        var mm = String(now.getMonth() + 1).padStart(2, '0');
+        var dd = String(now.getDate()).padStart(2, '0');
+        var todayStr = yyyy + '-' + mm + '-' + dd;
+
+        var maxDate = new Date();
+        maxDate.setDate(now.getDate() + 14);
+        var maxYyyy = maxDate.getFullYear();
+        var maxMm = String(maxDate.getMonth() + 1).padStart(2, '0');
+        var maxDd = String(maxDate.getDate()).padStart(2, '0');
+        var maxDateStr = maxYyyy + '-' + maxMm + '-' + maxDd;
+
         var dueDateInput = document.getElementById("dueDate");
         if (dueDateInput) {
-            dueDateInput.min = today;
+            dueDateInput.min = todayStr;
+            dueDateInput.max = maxDateStr;
         }
     });
 </script>

@@ -29,7 +29,7 @@ public class BookDAO {
      * Save a new book.
      */
     public void save(Book book) {
-        getSession().save(book);
+        getSession().persist(book);
     }
 
     /**
@@ -63,7 +63,7 @@ public class BookDAO {
      * Update an existing book.
      */
     public void update(Book book) {
-        getSession().update(book);
+        getSession().merge(book);
     }
 
     /**
@@ -72,7 +72,7 @@ public class BookDAO {
     public void delete(int id) {
         Book book = findById(id);
         if (book != null) {
-            getSession().delete(book);
+            getSession().remove(book);
         }
     }
 }

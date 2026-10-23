@@ -20,17 +20,19 @@ public class MemberService {
     private UserDAO userDAO;
 
     /**
-     * Add a new member.
-     * Always sets role to MEMBER.
+     * Add a new member or librarian.
+     * Defaults to MEMBER if role is not set.
      */
     @Transactional
     public void addMember(User user) {
-        user.setRole("MEMBER");
+        if (user.getRole() == null || user.getRole().trim().isEmpty()) {
+            user.setRole("MEMBER");
+        }
         userDAO.save(user);
     }
 
     /**
-     * Get all members (users with role = MEMBER).
+     * Get all members and librarians.
      */
     @Transactional(readOnly = true)
     public List<User> getAllMembers() {
@@ -38,7 +40,7 @@ public class MemberService {
     }
 
     /**
-     * Get a single member by ID.
+     * Get a single user by ID.
      */
     @Transactional(readOnly = true)
     public User getMemberById(int id) {
@@ -46,12 +48,14 @@ public class MemberService {
     }
 
     /**
-     * Update member details.
-     * Always preserves role as MEMBER.
+     * Update user details and role.
+     * Defaults to MEMBER if role is not set.
      */
     @Transactional
     public void updateMember(User user) {
-        user.setRole("MEMBER");
+        if (user.getRole() == null || user.getRole().trim().isEmpty()) {
+            user.setRole("MEMBER");
+        }
         userDAO.update(user);
     }
 

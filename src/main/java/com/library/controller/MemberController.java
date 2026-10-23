@@ -48,8 +48,10 @@ public class MemberController {
      */
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("member", new User());
-        model.addAttribute("formAction", "Add Member");
+        User user = new User();
+        user.setRole("MEMBER");
+        model.addAttribute("member", user);
+        model.addAttribute("formAction", "Add User");
         return "member-form";   // -> WEB-INF/views/member-form.jsp
     }
 
